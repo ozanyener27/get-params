@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 <html lang="cs">
+<body class="{{ color_theme }}">
+    <form method="get" action="{{url_for('vzhled')}}">
+        <label for="font_color">Barva písma:</label>
+        <select name="font_color" id="font_color">
+            <option
+             value="red"
+             {% if font_color == 'red' %} selected {% endif %}>
+                >Červená</option>
+            <option value="green" {% if font_color == 'green' %} selected {% endif %}>Zelená</option>
+            <option value="blue" {% if font_color == 'blue' %} selected {% endif %}>Modrá</option>
+        </select>
+        <button type="submit">Použít</button>
+    </form>
+    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +22,20 @@
     <link
      rel="stylesheet" 
      href="{{ url_for('static', filename='vzhled.css') }}">
+
+     <style>
+        body {
+            font-size: {{ font_size }}pt;
+            color: {{ font_color }};
+        }
+     </style>
 </head>
 <body class="{{ color_theme }}">
 
     <form method="get" action="{{ url_for('vzhled') }}">
+        <label for="font_size">Velikost písma:</label>
+        <input type="number" name="font_size" id="font_size" min="10" max="30" value="{{ font_size }}">
+        <br>
         <label for="theme">Vyberte barevné schéma:</label>
         <select name="theme" id="color_theme">
             <option value="light">Světlé</option>
